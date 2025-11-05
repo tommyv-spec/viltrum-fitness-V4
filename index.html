@@ -421,16 +421,41 @@
             <div class="carousel-container">
               <div class="carousel-wrapper">
                 <div class="carousel-track" id="carousel-track"></div>
+                <!-- Overlay for main text when expanded -->
+                <div class="carousel-text-overlay" id="carousel-text-overlay" style="display: none;">
+                  <p id="overlay-text"></p>
+                </div>
               </div>
               <button class="carousel-btn prev" id="carousel-prev" aria-label="Previous">‹</button>
               <button class="carousel-btn next" id="carousel-next" aria-label="Next">›</button>
               <div class="carousel-dots" id="carousel-dots"></div>
             </div>
             
-            <p id="sheet-description">Monitora i tuoi pasti e ottimizza la tua dieta</p>
+            <!-- Main text that syncs with carousel -->
+            <p id="sheet-main-text" class="sheet-main-text">Testo principale</p>
+            
+            <button id="details-toggle-btn" class="details-toggle-btn">
+              <span>Altri dettagli</span>
+              <span class="toggle-icon">↓</span>
+            </button>
+            
+            <div id="details-section" class="details-section" style="display: none;">
+              <div class="detail-item" id="detail-1">
+                <h4>Traccia Macronutrienti</h4>
+                <p>Monitora proteine, carboidrati e grassi per risultati ottimali</p>
+              </div>
+              <div class="detail-item" id="detail-2">
+                <h4>Piano Personalizzato</h4>
+                <p>Ricette e piani pasto basati sui tuoi obiettivi specifici</p>
+              </div>
+              <div class="detail-item" id="detail-3">
+                <h4>Progressi Visibili</h4>
+                <p>Analisi dettagliata delle tue abitudini alimentari nel tempo</p>
+              </div>
+            </div>
+            
             <div class="sheet-actions">
               <button id="sheet-start-btn" class="sheet-btn primary">Inizia Allenamento</button>
-              <button id="sheet-close-btn" class="sheet-btn secondary">Chiudi</button>
             </div>
           </div>
         </div>
