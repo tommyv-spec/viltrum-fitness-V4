@@ -1,9 +1,9 @@
 /* ====== CSS VARIABLES FOR DYNAMIC LAYOUT ====== */
 :root{
-  --header-height: calc(13dvh + env(safe-area-inset-top, 0px));
+  --header-height: calc(13svh + env(safe-area-inset-top, 0px));
 
   /* Height of the bar itself */
-  --bottom-button-height: 8dvh;
+  --bottom-button-height: 8svh;
 
   /* iOS notches / home indicator */
   --safe-area-top: env(safe-area-inset-top, 0px);
@@ -12,10 +12,10 @@
   /* Bar + safe area combined */
   --bottom-button-total: calc(var(--bottom-button-height) + var(--safe-area-bottom));
 
-  /* Use sdvh first on iOS, then dvh, then dvh as fallback */
-  --main-app-height-sdvh: calc(100sdvh - var(--header-height) - var(--bottom-button-total));
-  --main-app-height-dvh: calc(100dvh - var(--header-height) - var(--bottom-button-total));
-  --main-app-height:     calc(100dvh  - var(--header-height) - var(--bottom-button-total));
+  /* Use ssvh first on iOS, then svh, then svh as fallback */
+  --main-app-height-ssvh: calc(100ssvh - var(--header-height) - var(--bottom-button-total));
+  --main-app-height-svh: calc(100svh - var(--header-height) - var(--bottom-button-total));
+  --main-app-height:     calc(100svh  - var(--header-height) - var(--bottom-button-total));
 
   /* ====== MONOCHROME COLOR PALETTE (USER PROVIDED) ====== */
   /* Exact colors from user palette */
@@ -46,25 +46,25 @@
   --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
 
   /* Login layout helpers */
-  --login-gap: clamp(14px, 3.6dvh, 26px);
-  --login-card-max-height: clamp(208px, 34dvh, 328px);
-  --training-selector-padding-y: clamp(10px, 2.8dvh, 18px);
-  --training-selector-min-height: clamp(150px, 32dvh, 310px);
-  --training-image-max-height: clamp(220px, 42dvh, 360px);
+  --login-gap: clamp(14px, 3.6svh, 26px);
+  --login-card-max-height: clamp(208px, 34svh, 328px);
+  --training-selector-padding-y: clamp(10px, 2.8svh, 18px);
+  --training-selector-min-height: clamp(150px, 32svh, 310px);
+  --training-image-max-height: clamp(220px, 42svh, 360px);
   --login-screen-height: min(
-    calc(100sdvh - var(--header-height) - var(--safe-area-bottom)),
-    calc(100dvh - var(--header-height) - var(--safe-area-bottom)),
-    calc(100dvh - var(--header-height) - var(--safe-area-bottom))
+    calc(100ssvh - var(--header-height) - var(--safe-area-bottom)),
+    calc(100svh - var(--header-height) - var(--safe-area-bottom)),
+    calc(100svh - var(--header-height) - var(--safe-area-bottom))
   );
   --login-screen-height-js: var(--login-screen-height);
-  --visible-dvh: 100dvh;
+  --visible-svh: 100svh;
   --visible-vw: 100vw;
-  --main-app-visible-height: var(--main-app-height-dvh);
+  --main-app-visible-height: var(--main-app-height-svh);
   --training-selector-js-height: var(--training-image-max-height);
-  --bottom-sheet-max-height: clamp(420px, 72dvh, 560px);
-  --bottom-sheet-padding-y: clamp(18px, 3.5dvh, 26px);
+  --bottom-sheet-max-height: clamp(420px, 72svh, 560px);
+  --bottom-sheet-padding-y: clamp(18px, 3.5svh, 26px);
   --bottom-sheet-side-padding: clamp(18px, 4vw, 24px);
-  --bottom-sheet-gap: clamp(12px, 2.5dvh, 18px);
+  --bottom-sheet-gap: clamp(12px, 2.5svh, 18px);
   --bottom-sheet-carousel-height: clamp(160px, calc(var(--bottom-sheet-max-height) * 0.45), 280px);
 }
 
@@ -84,8 +84,8 @@
 
 html, body {
 
-  height: 100dvh; /* Dynamic viewport height for mobile */
-  min-height: 100sdvh; /* Small viewport height fallback */
+  height: 100svh; /* Dynamic viewport height for mobile */
+  min-height: 100ssvh; /* Small viewport height fallback */
 
 
   margin: 0;
@@ -114,9 +114,9 @@ body::before {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 100dvh;
-  height: 100dvh;
-  height: 100sdvh;
+  height: 100svh;
+  height: 100svh;
+  height: 100ssvh;
   background: var(--gradient-dark);
   background-color: var(--color-bg-dark);
   z-index: -1; /* Behind all content */
@@ -142,8 +142,8 @@ body {
   color: var(--color-white);
 
   /* CRITICAL: Ensure background fills everything */
-  min-height: 100dvh;
-  min-height: 100dvh;
+  min-height: 100svh;
+  min-height: 100svh;
   min-height: -webkit-fill-available;
 
   /* Safari iOS specific */
@@ -221,17 +221,17 @@ body:has(#login-screen:not([style*="display: none"])) main {
   max-width: min(1100px, 94vw);
   width: 100%;
   min-height: min(
-    var(--login-screen-height-js, 100dvh),
-    calc(100sdvh - var(--header-height)),
-    calc(100dvh - var(--header-height)),
-    calc(100dvh - var(--header-height))
+    var(--login-screen-height-js, 100svh),
+    calc(100ssvh - var(--header-height)),
+    calc(100svh - var(--header-height)),
+    calc(100svh - var(--header-height))
   );
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: clamp(16px, 4dvh, 32px);
-  padding: clamp(12px, 3.5dvh, 28px) clamp(20px, 7vw, 72px);
+  gap: clamp(16px, 4svh, 32px);
+  padding: clamp(12px, 3.5svh, 28px) clamp(20px, 7vw, 72px);
   box-sizing: border-box;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
@@ -369,7 +369,7 @@ body:has(#login-screen:not([style*="display: none"])) main {
   backdrop-filter: blur(20px);
   border: var(--border-medium);
   border-radius: clamp(16px, 3vw, 24px);
-  padding: clamp(18px, 2.5dvh, 24px) clamp(20px, 3.5vw, 28px);
+  padding: clamp(18px, 2.5svh, 24px) clamp(20px, 3.5vw, 28px);
   box-shadow: var(--shadow-xl);
   text-align: center;
   width: min(90vw, 400px); /* Expanded width for better balance */
@@ -381,7 +381,7 @@ body:has(#login-screen:not([style*="display: none"])) main {
   max-height: var(--login-card-max-height);
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 1.8dvh, 16px); /* Consistent spacing between elements */
+  gap: clamp(12px, 1.8svh, 16px); /* Consistent spacing between elements */
   justify-content: center;
   overflow: hidden;
 }
@@ -414,7 +414,7 @@ body:has(#login-screen:not([style*="display: none"])) main {
 .login-card input[type="text"],
 .login-card input[type="password"] {
   width: 100%;
-  padding: clamp(12px, 1.8dvh, 16px) clamp(14px, 2.5vw, 18px);
+  padding: clamp(12px, 1.8svh, 16px) clamp(14px, 2.5vw, 18px);
   margin: 0;
   border: var(--border-subtle);
   border-radius: clamp(10px, 1.8vw, 14px);
@@ -447,7 +447,7 @@ body:has(#login-screen:not([style*="display: none"])) main {
 */
 .login-card button {
   width: 100%;
-  padding: clamp(14px, 2dvh, 18px) clamp(16px, 2.5vw, 20px);
+  padding: clamp(14px, 2svh, 18px) clamp(16px, 2.5vw, 20px);
   background: var(--gradient-button);
   color: var(--color-black);
   font-size: clamp(15px, 3.8vw, 19px); /* Clear, readable button text */
@@ -482,29 +482,29 @@ body:has(#login-screen:not([style*="display: none"])) main {
   #login-screen {
     grid-template-rows: minmax(0, auto) auto;
     align-content: flex-start;
-    row-gap: clamp(2dvh, 2.5dvh, 3dvh);
-    padding-top: 2dvh;
+    row-gap: clamp(2svh, 2.5svh, 3svh);
+    padding-top: 2svh;
     padding-left: clamp(16px, 4vw, 24px);  /* Better horizontal spacing */
     padding-right: clamp(16px, 4vw, 24px); /* Better horizontal spacing */
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), clamp(12px, 4dvh, 20px));
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), clamp(12px, 4svh, 20px));
   }
 
   .training-selector-container {
     justify-content: center;
-    gap: clamp(14px, 2.5dvh, 22px);
+    gap: clamp(14px, 2.5svh, 22px);
     max-width: min(78vw, 380px);
   }
   
   /* Ensure training image stays readable but not too wide */
   .training-image-wrapper {
     max-width: min(70vw, 340px); /* Reduced width */
-    min-height: clamp(120px, 38dvh, 220px);
+    min-height: clamp(120px, 38svh, 220px);
   }
   
   /* Optimize login card for small screens */
   .login-card {
-    padding: clamp(14px, 2dvh, 18px) clamp(16px, 3vw, 20px);
-    gap: clamp(10px, 1.5dvh, 14px);
+    padding: clamp(14px, 2svh, 18px) clamp(16px, 3vw, 20px);
+    gap: clamp(10px, 1.5svh, 14px);
     width: min(80vw, 350px); /* Reduced width */
   }
   
@@ -530,45 +530,45 @@ body:has(#login-screen:not([style*="display: none"])) main {
 
 @media (max-height: 700px) {
   :root {
-    --login-gap: clamp(10px, 2.8dvh, 20px);
-    --training-selector-padding-y: clamp(8px, 2.4dvh, 14px);
-    --training-selector-min-height: clamp(125px, 30dvh, 260px);
-    --training-image-max-height: clamp(200px, 40dvh, 330px);
+    --login-gap: clamp(10px, 2.8svh, 20px);
+    --training-selector-padding-y: clamp(8px, 2.4svh, 14px);
+    --training-selector-min-height: clamp(125px, 30svh, 260px);
+    --training-image-max-height: clamp(200px, 40svh, 330px);
   }
 
   #login-screen {
-    padding-top: clamp(8px, 2.2dvh, 14px);
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), clamp(10px, 2.5dvh, 16px));
+    padding-top: clamp(8px, 2.2svh, 14px);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), clamp(10px, 2.5svh, 16px));
   }
 
   .training-selector-container {
-    gap: clamp(12px, 2.4dvh, 20px);
+    gap: clamp(12px, 2.4svh, 20px);
   }
 
   .training-image-wrapper {
-    min-height: clamp(110px, 34dvh, 240px);
+    min-height: clamp(110px, 34svh, 240px);
   }
 }
 
 @media (max-height: 580px) {
   :root {
-    --login-gap: clamp(8px, 2.2dvh, 16px);
-    --training-selector-padding-y: clamp(6px, 2dvh, 12px);
-    --training-selector-min-height: clamp(110px, 28dvh, 220px);
-    --training-image-max-height: clamp(180px, 38dvh, 260px);
+    --login-gap: clamp(8px, 2.2svh, 16px);
+    --training-selector-padding-y: clamp(6px, 2svh, 12px);
+    --training-selector-min-height: clamp(110px, 28svh, 220px);
+    --training-image-max-height: clamp(180px, 38svh, 260px);
   }
 
   #login-screen {
-    padding-top: clamp(6px, 2dvh, 12px);
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), clamp(8px, 2dvh, 12px));
+    padding-top: clamp(6px, 2svh, 12px);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), clamp(8px, 2svh, 12px));
   }
 
   .training-selector-container {
-    gap: clamp(10px, 2dvh, 18px);
+    gap: clamp(10px, 2svh, 18px);
   }
 
   .training-image-wrapper {
-    min-height: clamp(90px, 32dvh, 200px);
+    min-height: clamp(90px, 32svh, 200px);
   }
 }
 
@@ -578,7 +578,7 @@ body:has(#login-screen:not([style*="display: none"])) main {
   background-color: var(--color-bg-dark) !important;
   
   /* CRITICAL: Precise height calculation - ends exactly where button starts */
-  height: min(var(--main-app-height-dvh), var(--main-app-visible-height, var(--main-app-height-dvh)));
+  height: min(var(--main-app-height-svh), var(--main-app-visible-height, var(--main-app-height-svh)));
   height: min(var(--main-app-height), var(--main-app-visible-height, var(--main-app-height))); /* Fallback */
   /* NO max-height - would override the calculated height! */
   
@@ -837,7 +837,7 @@ body:has(#exercise-container[style*="display: flex"]) #start-button-bottom {
 }
 
 .instructions-content {
-  max-height: min(500px, 60dvh);
+  max-height: min(500px, 60svh);
   overflow: hidden;
   transition: max-height 0.3s ease-out;
 }
@@ -1144,13 +1144,13 @@ body:has(#exercise-container[style*="display: flex"]) #start-button-bottom {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100dvh;
-  height: 100sdvh;
-  max-height: 100dvh;
-  max-height: 100sdvh;
+  height: 100svh;
+  height: 100ssvh;
+  max-height: 100svh;
+  max-height: 100ssvh;
   /* Responsive padding with safe areas */
-  padding: max(0.5dvh, env(safe-area-inset-top)) clamp(8px, 2vw, 10px) max(0.5dvh, env(safe-area-inset-bottom)) clamp(8px, 2vw, 10px);
-  gap: clamp(2px, 0.5dvh, 4px);
+  padding: max(0.5svh, env(safe-area-inset-top)) clamp(8px, 2vw, 10px) max(0.5svh, env(safe-area-inset-bottom)) clamp(8px, 2vw, 10px);
+  gap: clamp(2px, 0.5svh, 4px);
   position: fixed;
   top: 0;
   left: 0;
@@ -1181,7 +1181,7 @@ body:has(#exercise-container[style*="display: flex"]) {
   z-index: 2;
   line-height: 1;
   margin: 0;
-  padding: clamp(4px, 1dvh, 8px) clamp(8px, 2vw, 10px);
+  padding: clamp(4px, 1svh, 8px) clamp(8px, 2vw, 10px);
   flex-shrink: 0;
   flex-grow: 0;
   width: 100%;
@@ -1193,20 +1193,20 @@ body:has(#exercise-container[style*="display: flex"]) {
   font-size: clamp(15px, 4vw, 18px);
   font-weight: bold;
   color: #fff;
-  margin: 0 clamp(8px, 2vw, 10px) clamp(2px, 0.5dvh, 4px) clamp(8px, 2vw, 10px);
+  margin: 0 clamp(8px, 2vw, 10px) clamp(2px, 0.5svh, 4px) clamp(8px, 2vw, 10px);
   text-align: center;
   line-height: 1.2;
   flex-shrink: 0;
   flex-grow: 0;
   /* Responsive min-height */
-  min-height: clamp(42px, 8dvh, 48px);
+  min-height: clamp(42px, 8svh, 48px);
   max-height: none;
   overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(6px, 1.5dvh, 8px) clamp(10px, 2.5vw, 14px);
+  padding: clamp(6px, 1.5svh, 8px) clamp(10px, 2.5vw, 14px);
   text-shadow: 0 2px 8px rgba(0,0,0,0.9);
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
@@ -1222,7 +1222,7 @@ body:has(#exercise-container[style*="display: flex"]) {
 #exercise-gif,
 #next-exercise-gif {
   /* CRITICAL: Responsive width that maintains 9:16 aspect ratio */
-  width: min(85vw, 75dvh);
+  width: min(85vw, 75svh);
   max-width: 90vw;
   /* CRITICAL: Force 9:16 vertical aspect ratio */
   aspect-ratio: 9 / 16;
@@ -1247,8 +1247,8 @@ body:has(#exercise-container[style*="display: flex"]) {
   align-items: center;
   gap: clamp(6px, 2vw, 12px);
   margin: 0;
-  padding: clamp(6px, 1.5dvh, 8px) clamp(8px, 2vw, 10px);
-  padding-bottom: max(clamp(6px, 1.5dvh, 8px), env(safe-area-inset-bottom, 8px));
+  padding: clamp(6px, 1.5svh, 8px) clamp(8px, 2vw, 10px);
+  padding-bottom: max(clamp(6px, 1.5svh, 8px), env(safe-area-inset-bottom, 8px));
   flex-wrap: nowrap;
   flex-shrink: 0;
   flex-grow: 0;
@@ -1259,7 +1259,7 @@ body:has(#exercise-container[style*="display: flex"]) {
 .settings-btn,
 .nav-btn {
   /* Responsive padding and font */
-  padding: clamp(7px, 2dvh, 10px) clamp(12px, 3vw, 20px);
+  padding: clamp(7px, 2svh, 10px) clamp(12px, 3vw, 20px);
   font-size: clamp(13px, 3.5vw, 16px);
   font-weight: bold;
   border: none;
@@ -1280,7 +1280,7 @@ body:has(#exercise-container[style*="display: flex"]) {
 
 .nav-btn {
   font-size: clamp(15px, 4vw, 18px);
-  padding: clamp(7px, 2dvh, 10px) clamp(10px, 2.5vw, 15px);
+  padding: clamp(7px, 2svh, 10px) clamp(10px, 2.5vw, 15px);
   background-color: rgba(176, 176, 176, 0.1);
   border: 1px solid rgba(176, 176, 176, 0.3);
 }
@@ -1296,7 +1296,7 @@ body:has(#exercise-container[style*="display: flex"]) {
 
 .settings-btn {
   font-size: clamp(16px, 4.5vw, 20px);
-  padding: clamp(7px, 2dvh, 10px) clamp(12px, 3vw, 16px);
+  padding: clamp(7px, 2svh, 10px) clamp(12px, 3vw, 16px);
 }
 
 /* Settings Popup Overlay */
@@ -1741,7 +1741,7 @@ audio {
 #progress-bar {
   position: relative;
   width: 100%;
-  height: clamp(22px, 4dvh, 26px);
+  height: clamp(22px, 4svh, 26px);
   background: rgba(255, 255, 255, 0.08);
   border-radius: clamp(12px, 2.4vw, 14px);
   overflow: hidden;
@@ -1796,9 +1796,9 @@ audio {
 /* ====== MOBILE VIEWPORT FIX ====== */
 
 /* Ensure exercise container uses all available space on all browsers */
-@supports (height: 100dvh) {
+@supports (height: 100svh) {
   #exercise-container {
-    height: 100dvh !important;
+    height: 100svh !important;
   }
 }
 
@@ -1823,16 +1823,16 @@ body:has(#exercise-container[style*="display: flex"]) html {
 /* Landscape optimization - reduce vertical space usage */
 @media (orientation: landscape) {
   :root {
-    --header-height: 10dvh;
-    --bottom-button-height: 10dvh;
+    --header-height: 10svh;
+    --bottom-button-height: 10svh;
   }
 
   #exercise-gif {
-    width: min(40vw, 65dvh);
+    width: min(40vw, 65svh);
   }
 
   #timer {
-    font-size: clamp(6dvh, 12vw, 10dvh);
+    font-size: clamp(6svh, 12vw, 10svh);
   }
 
   .section-cards-grid {
@@ -1846,8 +1846,8 @@ body:has(#exercise-container[style*="display: flex"]) html {
 #exercise-container {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
-  max-height: 100dvh;
+  height: 100svh;
+  max-height: 100svh;
   min-height: 0;
 }
 
@@ -1974,8 +1974,8 @@ body {
   font-family: 'Staatliches', sans-serif;
   background: #000000;
   color: #fff;
-  min-height: 100dvh;
-  min-height: 100dvh;
+  min-height: 100svh;
+  min-height: 100svh;
   min-height: -webkit-fill-available;
   -webkit-background-size: cover;
   background-size: cover;
@@ -1999,7 +1999,7 @@ main { max-width: min(600px, 95vw); margin: 0 auto; padding: 0 20px; background:
 /* ====== SETUP SCREEN ====== */
 #main-app {
   background: transparent;
-  height: min(var(--main-app-height-dvh), var(--main-app-visible-height, var(--main-app-height-dvh)));
+  height: min(var(--main-app-height-svh), var(--main-app-visible-height, var(--main-app-height-svh)));
   height: min(var(--main-app-height), var(--main-app-visible-height, var(--main-app-height)));
   overflow-y: auto;
   overflow-x: hidden;
@@ -2075,7 +2075,7 @@ main { max-width: min(600px, 95vw); margin: 0 auto; padding: 0 20px; background:
 .instructions-title { flex:1; font-size: clamp(13px,2.5vw,15px); font-weight:700; letter-spacing:1.5px; }
 .collapse-icon { font-size: clamp(12px,2.3vw,14px); transition: transform .3s; }
 .instructions-header.collapsed .collapse-icon { transform: rotate(-90deg); }
-.instructions-content { max-height: min(500px,60dvh); overflow: hidden; transition: max-height .3s ease-out; }
+.instructions-content { max-height: min(500px,60svh); overflow: hidden; transition: max-height .3s ease-out; }
 .instructions-content.collapsed { max-height: 0; }
 #instructions-box { background:#FFFFFF;  font-size: clamp(13px,2.5vw,15px); color:#000000; text-align:left; line-height:1.6; }
 #instructions-text { margin:0; color:#000000; }
@@ -2460,8 +2460,8 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
 /* Replace ALL other #main-app rules for height/padding with this */
 #main-app{
   height: min(
-    calc(100sdvh - var(--header-height) - var(--footer-total)),
-    var(--main-app-visible-height, calc(100sdvh - var(--header-height) - var(--footer-total)))
+    calc(100ssvh - var(--header-height) - var(--footer-total)),
+    var(--main-app-visible-height, calc(100ssvh - var(--header-height) - var(--footer-total)))
   );
   overflow-y: auto;
   overflow-x: hidden;
@@ -2504,7 +2504,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 3dvh, 24px);
+  gap: clamp(16px, 3svh, 24px);
   min-height: var(--training-selector-min-height);
   max-height: min(
     100%,
@@ -2559,7 +2559,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
     var(--training-image-max-height),
     var(--training-selector-js-height, var(--training-image-max-height))
   );
-  min-height: clamp(130px, 32dvh, 300px); /* Minimum readable size */
+  min-height: clamp(130px, 32svh, 300px); /* Minimum readable size */
 }
 
 .training-base-image {
@@ -2974,8 +2974,8 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
   background: var(--color-dark-grey);
   border-radius: clamp(20px, 5vw, 24px) clamp(20px, 5vw, 24px) 0 0;
   padding: var(--bottom-sheet-padding-y) var(--bottom-sheet-side-padding) calc(var(--bottom-sheet-padding-y) + var(--safe-area-bottom));
-  height: 85dvh;
-  max-height: 85dvh;
+  height: 85svh;
+  max-height: 85svh;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
   box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
@@ -2991,10 +2991,10 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
 
 .bottom-sheet-handle {
   width: clamp(35px, 8vw, 40px);
-  height: clamp(3px, 0.8dvh, 4px);
+  height: clamp(3px, 0.8svh, 4px);
   background: var(--color-medium-grey);
-  border-radius: clamp(1.5px, 0.4dvh, 2px);
-  margin: 0 auto clamp(15px, 3dvh, 20px);
+  border-radius: clamp(1.5px, 0.4svh, 2px);
+  margin: 0 auto clamp(15px, 3svh, 20px);
   opacity: 0.5;
 }
 
@@ -3110,8 +3110,8 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
   display: flex;
   justify-content: center;
   gap: clamp(6px, 1.5vw, 8px);
-  margin-top: clamp(10px, 2dvh, 12px);
-  padding: clamp(5px, 1dvh, 8px) 0;
+  margin-top: clamp(10px, 2svh, 12px);
+  padding: clamp(5px, 1svh, 8px) 0;
   flex-shrink: 0;
 }
 
@@ -3203,7 +3203,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
 }
 
 .sheet-btn {
-  padding: clamp(14px, 3dvh, 16px) clamp(20px, 4vw, 24px);
+  padding: clamp(14px, 3svh, 16px) clamp(20px, 4vw, 24px);
   border-radius: clamp(10px, 2.5vw, 12px);
   font-size: clamp(14px, 3vw, 16px);
   font-weight: bold;
@@ -3251,7 +3251,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: clamp(8px, 1.5dvh, 12px) 0;
+  margin: clamp(8px, 1.5svh, 12px) 0;
   flex-shrink: 0;
 }
 
@@ -3277,8 +3277,8 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
 .details-section {
   display: none;
   flex-direction: column;
-  gap: clamp(10px, 2dvh, 14px);
-  margin: clamp(8px, 1.5dvh, 12px) 0;
+  gap: clamp(10px, 2svh, 14px);
+  margin: clamp(8px, 1.5svh, 12px) 0;
   flex-shrink: 1;
   animation: slideDown 0.3s ease;
   overflow-y: auto;
@@ -3300,7 +3300,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  padding: clamp(12px, 2.5dvh, 16px) clamp(14px, 3vw, 18px);
+  padding: clamp(12px, 2.5svh, 16px) clamp(14px, 3vw, 18px);
 }
 
 .detail-item h4 {
@@ -3308,7 +3308,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
   font-family: 'Staatliches', sans-serif;
   font-size: clamp(14px, 3vw, 16px);
   letter-spacing: 1px;
-  margin: 0 0 clamp(6px, 1dvh, 8px) 0;
+  margin: 0 0 clamp(6px, 1svh, 8px) 0;
   text-transform: uppercase;
 }
 
@@ -3321,14 +3321,14 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
 
 /* When details are expanded - carousel becomes smaller */
 .bottom-sheet.details-expanded .carousel-container {
-  flex: 0 0 clamp(80px, 18dvh, 120px);
-  max-height: clamp(80px, 18dvh, 120px);
-  min-height: clamp(80px, 18dvh, 120px);
+  flex: 0 0 clamp(80px, 18svh, 120px);
+  max-height: clamp(80px, 18svh, 120px);
+  min-height: clamp(80px, 18svh, 120px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bottom-sheet.details-expanded .details-section {
-  max-height: 50dvh;
+  max-height: 50svh;
   overflow-y: auto;
   flex: 1 1 auto;
 }
@@ -3361,7 +3361,7 @@ body:has(#login-screen:not([style*="display: none"])) #bottom-buttons-container 
     justify-content: center;
     align-items: center;
     gap: clamp(16px, 5cqw, 32px);
-    padding: clamp(16px, 4dvh, 26px) clamp(4vw, 6vw, 8vw);
+    padding: clamp(16px, 4svh, 26px) clamp(4vw, 6vw, 8vw);
   }
   
   .training-selector-container {
@@ -3566,7 +3566,7 @@ body:has(#exercise-container[style*="display: flex"]) {
 /* Disable page scrolling while login is visible */
 html.no-scroll,
 body.no-scroll{
-  height: 100dvh;    /* true dynamic viewport height */
+  height: 100svh;    /* true dynamic viewport height */
   overflow: hidden;  /* no page scroll */
   overscroll-behavior: none;
   -webkit-overflow-scrolling: auto;
@@ -3650,7 +3650,7 @@ body.no-scroll{
 
 /* Ensure page cannot scroll while login is visible (JS toggles the class) */
 html.no-scroll, body.no-scroll{
-  height: 100dvh;
+  height: 100svh;
   overflow: hidden;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: auto;
