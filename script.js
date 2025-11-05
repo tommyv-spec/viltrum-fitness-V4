@@ -223,39 +223,51 @@ let selectedTrainingType = null;
 const trainingData = {
   nutrition: {
     title: "NUTRIZIONE",
-    description: "Monitora i tuoi pasti, ottimizza la tua dieta e raggiungi i tuoi obiettivi nutrizionali",
+    description: "Traccia ogni pasto e raggiungi i tuoi obiettivi con precisione",
     icon: "🥗",
     images: [
       {
         url: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-        caption: "Pasti Bilanciati"
+        mainText: "Traccia i tuoi macronutrienti con precisione per risultati ottimali",
+        caption: "Traccia Macronutrienti",
+        description: "Monitora proteine, carboidrati e grassi in tempo reale. Sistema avanzato di logging alimentare con database completo di oltre 50.000 alimenti."
       },
       {
         url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
-        caption: "Insalate Fresche"
+        mainText: "Piano alimentare personalizzato basato sui tuoi obiettivi",
+        caption: "Piano Personalizzato",
+        description: "Ricette e piani pasto generati automaticamente in base ai tuoi obiettivi. Adatta le porzioni e sostituisci ingredienti con un click."
       },
       {
         url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
-        caption: "Cibi Salutari"
+        mainText: "Analizza i progressi e migliora costantemente le tue abitudini",
+        caption: "Progressi Visibili",
+        description: "Grafici dettagliati delle tue abitudini alimentari. Identifica pattern e ottimizza la tua dieta settimana dopo settimana."
       }
     ]
   },
   aerobic: {
     title: "ALLENAMENTO AEROBICO",
-    description: "Migliora il tuo cardio, la resistenza e la forma fisica generale con esercizi aerobici",
+    description: "Brucia calorie, aumenta resistenza e migliora la salute cardiovascolare",
     icon: "🏃",
     images: [
       {
         url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&q=80",
-        caption: "Corsa e Cardio"
+        mainText: "Brucia calorie e migliora la resistenza cardiovascolare",
+        caption: "Cardio ad Alta Intensità",
+        description: "HIIT, corsa e ciclismo per massimizzare la perdita di grasso. Allenamenti da 20-45 minuti che stimolano il metabolismo per ore."
       },
       {
         url: "https://images.unsplash.com/photo-1483721310020-03333e577078?w=800&q=80",
-        caption: "Allenamento Outdoor"
+        mainText: "Programmi adattati al tuo livello di fitness attuale",
+        caption: "Allenamenti Personalizzati",
+        description: "Dal principiante all'atleta avanzato. Progressione automatica basata sulle tue performance e frequenza cardiaca."
       },
       {
         url: "https://images.unsplash.com/photo-1434596922112-19c563067271?w=800&q=80",
-        caption: "Resistenza"
+        mainText: "Traccia distanza, tempo, calorie e miglioramento costante",
+        caption: "Monitora i Progressi",
+        description: "Sincronizzazione con smartwatch e fitness tracker. Visualizza statistiche dettagliate e raggiungi nuovi record personali."
       }
     ]
   },
@@ -266,15 +278,21 @@ const trainingData = {
     images: [
       {
         url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
-        caption: "Allenamento Pesi"
+        mainText: "Costruisci forza e massa muscolare con allenamento di resistenza mirato",
+        caption: "Esercizi Fondamentali",
+        description: "Squat, panca, stacco e movimenti composti per crescita massima. Focus sui grandi gruppi muscolari per risultati rapidi e duraturi."
       },
       {
         url: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80",
-        caption: "Forza e Massa"
+        mainText: "Aumenta carichi gradualmente con progressione intelligente",
+        caption: "Progressione Intelligente",
+        description: "Sistema di sovraccarico progressivo scientificamente provato. Calcolo automatico dei carichi basato sulle tue performance settimanali."
       },
       {
         url: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&q=80",
-        caption: "Bodybuilding"
+        mainText: "Esecuzione perfetta per massimi risultati e sicurezza",
+        caption: "Tecnica Perfetta",
+        description: "Video guide dettagliate e correzioni in tempo reale. Impara la forma corretta per prevenire infortuni e ottimizzare ogni ripetizione."
       }
     ]
   }
@@ -285,18 +303,21 @@ function initTrainingSelector() {
   const bottomSheet = document.getElementById('training-bottom-sheet');
   const sheetOverlay = bottomSheet?.querySelector('.bottom-sheet-overlay');
   const sheetTitle = document.getElementById('sheet-title');
-  const sheetDescription = document.getElementById('sheet-description');
+  const sheetMainText = document.getElementById('sheet-main-text');
   const startBtn = document.getElementById('sheet-start-btn');
-  const closeBtn = document.getElementById('sheet-close-btn');
   
   // Carousel elements
   const carouselTrack = document.getElementById('carousel-track');
   const carouselDots = document.getElementById('carousel-dots');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
+  const carouselTextOverlay = document.getElementById('carousel-text-overlay');
+  const overlayText = document.getElementById('overlay-text');
+  const detailsSection = document.getElementById('details-section');
   
   let currentSlide = 0;
   let totalSlides = 0;
+  let currentImagesData = []; // Store current training images data
 
   if (!bottomSheet || zones.length === 0) return;
 
@@ -317,11 +338,39 @@ function initTrainingSelector() {
     // Update button states
     if (prevBtn) prevBtn.disabled = currentSlide === 0;
     if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+    
+    // Update main text and overlay text with current slide data
+    if (currentImagesData[currentSlide]) {
+      const slideData = currentImagesData[currentSlide];
+      
+      // Update main text (visible when not expanded)
+      if (sheetMainText) {
+        sheetMainText.textContent = slideData.mainText;
+      }
+      
+      // Update overlay text (visible when expanded)
+      if (overlayText) {
+        overlayText.textContent = slideData.mainText;
+      }
+      
+      // Update details section if visible (expanded state)
+      if (detailsSection && detailsSection.style.display !== 'none') {
+        detailsSection.innerHTML = `
+          <div class="detail-item">
+            <h4>${slideData.caption}</h4>
+            <p>${slideData.description}</p>
+          </div>
+        `;
+      }
+    }
   }
   
   // Initialize carousel with images
   function setupCarousel(images) {
     if (!carouselTrack || !carouselDots) return;
+    
+    // Save images data for text updates
+    currentImagesData = images;
     
     // Clear existing content
     carouselTrack.innerHTML = '';
@@ -335,7 +384,6 @@ function initTrainingSelector() {
       slide.className = 'carousel-slide';
       slide.innerHTML = `
         <img src="${img.url}" alt="${img.caption}" loading="lazy">
-        <div class="carousel-slide-caption">${img.caption}</div>
       `;
       carouselTrack.appendChild(slide);
       
@@ -410,9 +458,8 @@ function initTrainingSelector() {
 
       // Update bottom sheet content
       sheetTitle.textContent = data.title;
-      sheetDescription.textContent = data.description;
       
-      // Setup carousel with images
+      // Setup carousel with images (will also initialize main text)
       if (data.images && data.images.length > 0) {
         setupCarousel(data.images);
       }
@@ -428,11 +475,31 @@ function initTrainingSelector() {
   // Close bottom sheet
   function closeBottomSheet() {
     bottomSheet.classList.remove('active');
+    bottomSheet.classList.remove('details-expanded');
+    
+    // Reset details section
+    const detailsSectionEl = document.getElementById('details-section');
+    const detailsToggleBtnEl = document.getElementById('details-toggle-btn');
+    const sheetTitleEl = document.getElementById('sheet-title');
+    const sheetMainTextEl = document.getElementById('sheet-main-text');
+    const carouselTextOverlayEl = document.getElementById('carousel-text-overlay');
+    
+    if (detailsSectionEl) detailsSectionEl.style.display = 'none';
+    if (detailsToggleBtnEl) {
+      detailsToggleBtnEl.classList.remove('expanded');
+      const toggleIcon = detailsToggleBtnEl.querySelector('.toggle-icon');
+      const toggleText = detailsToggleBtnEl.querySelector('span:first-child');
+      if (toggleIcon) toggleIcon.textContent = '↓';
+      if (toggleText) toggleText.textContent = 'Altri dettagli';
+    }
+    if (sheetTitleEl) sheetTitleEl.style.display = 'block';
+    if (sheetMainTextEl) sheetMainTextEl.style.display = 'block';
+    if (carouselTextOverlayEl) carouselTextOverlayEl.style.display = 'none';
+    
     vibrate(5);
     updateViewportMetrics();
   }
 
-  closeBtn?.addEventListener('click', closeBottomSheet);
   sheetOverlay?.addEventListener('click', closeBottomSheet);
 
   // Start training button
@@ -457,6 +524,47 @@ function initTrainingSelector() {
         loginCard.style.border = '';
       }, 1500);
     }
+  });
+
+  // Details toggle button
+  const detailsToggleBtn = document.getElementById('details-toggle-btn');
+  
+  detailsToggleBtn?.addEventListener('click', () => {
+    const isExpanded = detailsSection.style.display !== 'none';
+    
+    if (isExpanded) {
+      // Collapse
+      detailsSection.style.display = 'none';
+      detailsToggleBtn.classList.remove('expanded');
+      detailsToggleBtn.querySelector('.toggle-icon').textContent = '↓';
+      detailsToggleBtn.querySelector('span:first-child').textContent = 'Altri dettagli';
+      sheetTitle.style.display = 'block';
+      sheetMainText.style.display = 'block';
+      carouselTextOverlay.style.display = 'none';
+      bottomSheet.classList.remove('details-expanded');
+    } else {
+      // Expand - show ONLY current slide details
+      if (currentImagesData[currentSlide]) {
+        const slideData = currentImagesData[currentSlide];
+        detailsSection.innerHTML = `
+          <div class="detail-item">
+            <h4>${slideData.caption}</h4>
+            <p>${slideData.description}</p>
+          </div>
+        `;
+      }
+      
+      detailsSection.style.display = 'block';
+      detailsToggleBtn.classList.add('expanded');
+      detailsToggleBtn.querySelector('.toggle-icon').textContent = '↑';
+      detailsToggleBtn.querySelector('span:first-child').textContent = 'Nascondi dettagli';
+      sheetTitle.style.display = 'none';
+      sheetMainText.style.display = 'none';
+      carouselTextOverlay.style.display = 'flex';
+      bottomSheet.classList.add('details-expanded');
+    }
+    
+    vibrate(5);
   });
 
   // Swipe down to close (mobile gesture)
